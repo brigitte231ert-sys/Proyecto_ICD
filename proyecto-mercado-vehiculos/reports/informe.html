@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<title>Informe — Mercado de motos, bicicletas y patinetas en Cuba</title>
+<style>
+@page { size: A4; margin: 2.2cm 2.2cm; }
+body { font-family: 'DejaVu Sans', Arial, sans-serif; font-size: 10.5pt;
+       line-height: 1.45; color: #1a1a1a; }
+h1 { font-size: 20pt; margin-bottom: 0.2em; color: #123a5c; }
+h2 { font-size: 14pt; margin-top: 1.4em; color: #123a5c;
+     border-bottom: 1px solid #c9d6e2; padding-bottom: 2px; }
+h3 { font-size: 12pt; margin-top: 1.1em; color: #1f4f73; }
+p { text-align: justify; margin: 0.5em 0; }
+img { width: 100%; max-width: 100%; height: auto; display: block;
+      margin: 0.6em auto; }
+table { border-collapse: collapse; width: 100%; margin: 0.8em 0;
+        font-size: 9.5pt; page-break-inside: avoid; }
+tr { page-break-inside: avoid; }
+th, td { border: 1px solid #b9c6d2; padding: 4px 6px; text-align: left; }
+th { background: #e8eef4; }
+h2, h3 { page-break-after: avoid; }
+code, pre { font-family: 'DejaVu Sans Mono', monospace; font-size: 8.8pt;
+            background: #f4f6f8; }
+pre { padding: 8px; border: 1px solid #dde3e8; white-space: pre-wrap;
+      page-break-inside: avoid; }
+blockquote { border-left: 3px solid #7fa3c2; margin-left: 0; padding-left: 1em;
+             color: #33475b; }
+hr { border: none; border-top: 1px solid #d5dde5; margin: 1.2em 0; }
+</style></head><body>
+<h1>Mercado de motos, bicicletas y patinetas en Cuba</h1>
+<h2>Un análisis exploratorio de anuncios clasificados (Revolico, 2026)</h2>
+<p><strong>Autor:</strong> Brigitte Hernández Romero
+<strong>Asignatura:</strong> Ciencia de Datos — primer año
+<strong>Institución:</strong> Universidad de La Habana
+<strong>Fecha:</strong> 6 de noviembre de 2026</p>
+<hr />
+<h2>Resumen</h2>
+<p>Este trabajo describe el mercado cubano de motos, bicicletas y patinetas a
+partir de <strong>9 841 anuncios clasificados</strong> publicados en Revolico entre el 5 de
+septiembre y el 5 de noviembre de 2026. La recolección automatizada partió de
+13 446 anuncios únicos; tras filtrar los relacionados con el objeto de estudio,
+eliminar duplicados y descartar precios nulos o señuelo, quedó una base de
+9 841 registros. El análisis es descriptivo y exploratorio: composición por
+categoría, moneda y provincia, distribución de precios pedidos, marcas y
+algunas características del vehículo.</p>
+<p>Los resultados muestran un mercado dominado por el dólar (97,4 % de los
+anuncios con moneda), concentrado en La Habana (94,8 %) y con una brecha
+importante entre motos de combustión y eléctricas: la mediana de las primeras
+es de <strong>2 200 USD</strong>, frente a <strong>1 485 USD</strong> en las eléctricas. Las bicicletas
+son el segmento más barato (mediana de <strong>160 USD</strong>) y las patinetas se ubican
+en <strong>720 USD</strong>. La cobertura de marca, año y cilindrada es baja, por lo que los
+cruces con esas variables son exploratorios.</p>
+<p>El componente cualitativo previsto —30 entrevistas— <strong>no se pudo completar</strong>.
+No hay entrevistas válidas registradas ni consentimiento escrito, de modo que
+el informe se apoya en los anuncios. Para compensar, se realizó un <strong>análisis
+de contenido de una muestra aleatoria de 200 títulos</strong>, contrastado con los
+9 841 títulos del dataset, que describe qué destaca el vendedor y qué
+información omite. Esta limitación se declara de forma explícita y se discute
+su efecto sobre las conclusiones.</p>
+<p><strong>Palabras clave:</strong> mercado, motos eléctricas, bicicletas, patinetas, Cuba,
+análisis exploratorio, datos de clasificados.</p>
+<hr />
+<h2>1. Introducción</h2>
+<h3>1.1 Contexto</h3>
+<p>La movilidad cotidiana en Cuba depende en gran medida de vehículos ligeros:
+motos de combustión, motos eléctricas, bicicletas y patinetas. En los últimos
+años la moto eléctrica se consolidó como una alternativa para mensajeros,
+trabajadores y estudiantes, mientras que la bicicleta sigue siendo el medio más
+barato y la patineta gana espacio en trayectos cortos. Al mismo tiempo, la
+compra de un vehículo ligero implica una inversión considerable en un contexto
+de ingresos bajos, restricciones de importación y escasez de repuestos.</p>
+<p>A pesar de su importancia, no existe un registro público sistemático de precios.
+La información circula en clasificados, grupos de mensajería y conversaciones
+informales. Esa opacidad dificulta comparar opciones, estimar el costo real de
+la movilidad y entender cómo se forma el precio.</p>
+<h3>1.2 Problema</h3>
+<p>Los anuncios de Revolico ofrecen una ventana a la oferta real, pero no están
+estructurados para el análisis: el precio aparece como texto libre, la moneda
+varía, la marca y el año suelen estar en el título y muchas publicaciones
+mezclan vehículos con accesorios. Convertir ese material en una base analizable
+exige un trabajo de limpieza y documentación de supuestos.</p>
+<h3>1.3 Preguntas de investigación</h3>
+<ol>
+<li>¿Cómo se compone la oferta de motos, bicicletas y patinetas en Revolico?</li>
+<li>¿Qué precios se piden y cómo varían por categoría, tipo de propulsión,
+   marca y provincia?</li>
+<li>¿Qué limitaciones tiene usar anuncios clasificados para describir el
+   mercado y qué no se puede concluir con ellos?</li>
+</ol>
+<h3>1.4 Objetivos</h3>
+<p><strong>General:</strong> describir la estructura y los precios del mercado de vehículos
+ligeros en Cuba a partir de anuncios clasificados.</p>
+<p><strong>Específicos:</strong></p>
+<ul>
+<li>construir una base limpia y reproducible de anuncios;</li>
+<li>describir la composición por categoría, moneda y territorio;</li>
+<li>comparar los precios pedidos entre segmentos;</li>
+<li>documentar la calidad de los datos y los sesgos del análisis.</li>
+</ul>
+<hr />
+<h2>2. Datos y método</h2>
+<h3>2.1 Fuente</h3>
+<p>Los datos provienen de <strong>Revolico</strong>, sitio de clasificados de uso extendido en
+Cuba. La recolección se hizo con un scraper propio en Python, respetando
+<code>robots.txt</code> y con una pausa de 2–4 segundos entre peticiones. La captura se
+realizó el <strong>4 de noviembre de 2026, entre las 22:27 y las 22:36 EST</strong>. La
+ventana de publicación observada va del <strong>5 de septiembre al 5 de noviembre de
+2026</strong>.</p>
+<h3>2.2 Flujo de construcción de la base</h3>
+<table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th style="text-align: right;">Anuncios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anuncios únicos recolectados</td>
+<td style="text-align: right;">13 446</td>
+</tr>
+<tr>
+<td>Relacionados con el objeto de estudio</td>
+<td style="text-align: right;">11 621</td>
+</tr>
+<tr>
+<td>Para revisar manualmente</td>
+<td style="text-align: right;">295</td>
+</tr>
+<tr>
+<td>Excluidos por no ser vehículos del alcance</td>
+<td style="text-align: right;">1 530</td>
+</tr>
+<tr>
+<td>Duplicados por título + precio + municipio</td>
+<td style="text-align: right;">817</td>
+</tr>
+<tr>
+<td><strong>Relacionados únicos</strong></td>
+<td style="text-align: right;"><strong>10 804</strong></td>
+</tr>
+<tr>
+<td>Descartados en limpieza (precio nulo o señuelo)</td>
+<td style="text-align: right;">963</td>
+</tr>
+<tr>
+<td><strong>Anuncios limpios</strong></td>
+<td style="text-align: right;"><strong>9 841</strong></td>
+</tr>
+</tbody>
+</table>
+<p>El filtro de relevancia combinó palabras clave del título y del cuerpo del
+anuncio. Se excluyeron accesorios, repuestos, servicios y vehículos fuera del
+alcance. La limpieza descartó anuncios sin precio y precios menores a 5 o
+mayores a 1 000 000 en la moneda declarada, tratados como señuelos o errores de
+captura.</p>
+<h3>2.3 Variables</h3>
+<p>Cada anuncio incluye: identificador, categoría, título, precio, moneda,
+provincia, municipio, fecha de publicación, vistas, número de imágenes,
+indicador de anuncio destacado y URL. A partir del título se derivaron
+<code>marca</code>, <code>anio</code>, <code>cilindrada_cc</code>, <code>condicion</code> y <code>tipo</code> (combustión o eléctrica).
+<code>precio_usd</code> normaliza el precio cuando la moneda es USD.</p>
+<h3>2.4 Análisis</h3>
+<p>El análisis es <strong>descriptivo y exploratorio</strong>. Se usaron frecuencias,
+medianas, cuartiles y correlaciones de Pearson. Se eligió la mediana como
+medida central porque la distribución de precios tiene cola larga y valores
+extremos. Los cruces con <code>anio</code> y <code>cilindrada_cc</code> se presentan como
+exploratorios debido a su baja cobertura.</p>
+<p>No se convirtieron precios de CUP a USD: no hay una tasa única y verificable
+para el período. Por eso los cruces de precio se hacen <strong>solo con anuncios en
+USD</strong> (9 589 de 9 841).</p>
+<h3>2.5 Consideraciones éticas</h3>
+<p>El análisis usa únicamente información publicada voluntariamente en un sitio
+público de clasificados. No se recolectaron nombres, teléfonos ni direcciones
+de los anunciantes, y el informe no identifica a ninguna persona. Las URLs se
+conservan solo para trazabilidad interna y no se publican.</p>
+<hr />
+<h2>3. Resultados</h2>
+<h3>3.1 Composición del mercado</h3>
+<p>La base limpia contiene <strong>9 841 anuncios</strong>: 3 349 motos de combustión
+(34,0 %), 3 146 bicicletas (32,0 %), 2 807 motos eléctricas (28,5 %) y 539
+patinetas (5,5 %).</p>
+<p><img width="627" height="152" alt="Composición por categoría, moneda y provincia" src="figures/01_composicion.png" /></p>
+<p>La moneda dominante es el <strong>USD</strong>, presente en 9 589 anuncios (97,4 %). Le
+siguen 251 anuncios en CUP (2,6 %) y uno en MLC. La concentración en USD es un
+hallazgo en sí mismo: indica que el segmento relevante del mercado se cotiza en
+divisa, lo que excluye a buena parte de la población y dificulta comparar con
+ingresos en pesos.</p>
+<p>La distribución territorial es extremadamente desigual: <strong>La Habana reúne
+9 326 anuncios (94,8 %)</strong>, seguida de Artemisa (143), Pinar del Río (64) y
+Matanzas (54). Las demás provincias tienen menos de 50 anuncios cada una. Esto
+no significa que en el resto del país no se vendan vehículos, sino que
+Revolico se usa mucho más en la capital; el dato refleja la plataforma, no la
+geografía real de la demanda.</p>
+<h3>3.2 Precios pedidos</h3>
+<p>En los 9 589 anuncios en USD, el precio mediano es de <strong>1 100 USD</strong>, la media
+de <strong>1 398,6 USD</strong> y el rango va de 5 a 111 111 USD. La diferencia entre media
+y mediana confirma una cola derecha larga: unos pocos anuncios muy caros
+elevan el promedio.</p>
+<table>
+<thead>
+<tr>
+<th>Categoría</th>
+<th style="text-align: right;">n (USD)</th>
+<th style="text-align: right;">Mediana</th>
+<th style="text-align: right;">Media</th>
+<th style="text-align: right;">Desv. típ.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Motos de combustión</td>
+<td style="text-align: right;">3 322</td>
+<td style="text-align: right;"><strong>2 200</strong></td>
+<td style="text-align: right;">2 402</td>
+<td style="text-align: right;">2 257</td>
+</tr>
+<tr>
+<td>Motos eléctricas</td>
+<td style="text-align: right;">2 796</td>
+<td style="text-align: right;"><strong>1 485</strong></td>
+<td style="text-align: right;">1 540</td>
+<td style="text-align: right;">3 117</td>
+</tr>
+<tr>
+<td>Patinetas</td>
+<td style="text-align: right;">535</td>
+<td style="text-align: right;"><strong>720</strong></td>
+<td style="text-align: right;">636</td>
+<td style="text-align: right;">273</td>
+</tr>
+<tr>
+<td>Bicicletas</td>
+<td style="text-align: right;">2 936</td>
+<td style="text-align: right;"><strong>160</strong></td>
+<td style="text-align: right;">267</td>
+<td style="text-align: right;">2 052</td>
+</tr>
+</tbody>
+</table>
+<p><img width="627" height="174" alt="Distribución de precios en USD y precio por categoría" src="figures/02_precios.png" /></p>
+<p>La jerarquía de precios es clara: combustión &gt; eléctricas &gt; patinetas &gt;
+bicicletas. La brecha entre una moto de combustión y una eléctrica es de
+<strong>715 USD</strong> en la mediana, aproximadamente un 48 % más cara la de combustión.
+Sin embargo, la desviación típica de las eléctricas (3 117) es mayor que la de
+las de combustión (2 257), lo que sugiere un segmento más heterogéneo: conviven
+modelos económicos con importaciones de gama alta.</p>
+<p>Los anuncios en CUP (n = 251) tienen una mediana de <strong>5 000 CUP</strong>, con un rango
+de 12 a 250 000. No se comparan directamente con los de USD por la ausencia de
+una tasa de referencia documentada.</p>
+<h3>3.3 Motos eléctricas y de combustión</h3>
+<p>Entre las motos, 3 340 se clasificaron como de combustión y 2 801 como
+eléctricas; solo 15 quedaron sin clasificar o con una etiqueta inconsistente.
+La mediana confirma la hipótesis de partida: <strong>la moto eléctrica es más barata
+que la de combustión</strong> (1 485 vs. 2 200 USD), aunque con mayor dispersión.</p>
+<p><img width="627" height="307" alt="Precio de motos por tipo de propulsión" src="figures/06_tipo_moto.png" /></p>
+<p>Este resultado es consistente con el uso urbano: la eléctrica tiene menor
+autonomía y depende de la carga, pero su precio de entrada es más bajo y su
+costo operativo por kilómetro suele ser menor. El anuncio no permite medir ese
+costo operativo; solo muestra el precio pedido.</p>
+<h3>3.4 Marcas</h3>
+<p>La marca se pudo identificar en <strong>3 081 anuncios (31,3 %)</strong>. El resto no la
+declara en el título o usa denominaciones ambiguas. Las marcas más frecuentes
+son:</p>
+<table>
+<thead>
+<tr>
+<th>Marca</th>
+<th style="text-align: right;">Anuncios</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Topmaq</td>
+<td style="text-align: right;">418</td>
+</tr>
+<tr>
+<td>JMD</td>
+<td style="text-align: right;">257</td>
+</tr>
+<tr>
+<td>Yoazaky</td>
+<td style="text-align: right;">186</td>
+</tr>
+<tr>
+<td>Xmotors</td>
+<td style="text-align: right;">154</td>
+</tr>
+<tr>
+<td>Halcón</td>
+<td style="text-align: right;">152</td>
+</tr>
+<tr>
+<td>Unison</td>
+<td style="text-align: right;">146</td>
+</tr>
+<tr>
+<td>Katzu</td>
+<td style="text-align: right;">136</td>
+</tr>
+<tr>
+<td>Vivamax</td>
+<td style="text-align: right;">132</td>
+</tr>
+<tr>
+<td>Italy</td>
+<td style="text-align: right;">125</td>
+</tr>
+<tr>
+<td>Tank</td>
+<td style="text-align: right;">120</td>
+</tr>
+</tbody>
+</table>
+<p><img width="627" height="163" alt="Marcas más frecuentes y precio mediano por marca" src="figures/04_marcas.png" /></p>
+<p>Entre las marcas con al menos 20 anuncios en USD, las medianas más altas
+corresponden a <strong>Yamaha (5 500 USD)</strong> y <strong>Honda (4 500 USD)</strong>, coherentes con
+el prestigio y la disponibilidad de repuestos. En el extremo opuesto, las
+marcas de bicicletas se ubican por debajo de 200 USD: Huffy (150), Myniao
+(170), Vivamax (180) y Silver Bike (185).</p>
+<p>En motos de combustión, las medianas se agrupan entre 2 200 y 2 600 USD
+(Xmotors 2 400; Unison 2 600; Italy 2 550; Katzu 2 250; Suzuki 2 200). En
+eléctricas, Topmaq lidera en volumen (418 anuncios) con mediana de 2 200 USD,
+mientras que JMD, la segunda más frecuente, tiene mediana de 1 490 USD.</p>
+<h3>3.5 Geografía</h3>
+<p>La Habana concentra <strong>9 080 de los 9 589 anuncios en USD</strong> y tiene una mediana
+de <strong>1 000 USD</strong>. Entre las provincias con al menos 10 anuncios, las medianas
+más altas son Pinar del Río (2 000), Holguín (1 850) e Isla de la Juventud
+(1 850); las más bajas, Cienfuegos (210) y Santiago de Cuba (280). Estas cifras
+deben leerse con cautela: fuera de La Habana las muestras son pequeñas y
+pueden estar dominadas por un tipo de vehículo.</p>
+<p><img width="627" height="274" alt="Precio mediano en USD por provincia" src="figures/05_provincias.png" /></p>
+<h3>3.6 Condición, año y cilindrada</h3>
+<p>La condición solo se declara en <strong>1 078 anuncios (11,0 %)</strong>: 952 nuevos, 91
+usados y 35 seminuevos. En las motos, la mediana de las declaradas como usadas
+(1 210 USD) es menor que la de las nuevas (1 890 USD), lo que va en la
+dirección esperada, aunque el grupo de usadas es pequeño.</p>
+<p>El <strong>año</strong> aparece en 8,4 % de los anuncios; entre las motos en USD, en 798 de
+6 118 (13,0 %). La mediana es 2026 y el rango va de 1950 a 2026. La correlación
+entre año y precio es débil y negativa (r = −0,167, n = 798): a mayor año
+declarado, menor precio pedido, un resultado contraintuitivo que probablemente
+refleja que los anuncios más caros no declaran año o que "2026" se usa como
+sinónimo de "nuevo".</p>
+<p>La <strong>cilindrada</strong> aparece en 13,6 % de los anuncios y en 21,9 % de las motos en
+USD (1 342 casos). La correlación con el precio es moderada y positiva
+(r = +0,619, n = 1 342): a mayor cilindrada, mayor precio pedido. Este es el
+cruce más consistente de los dos, aunque sigue siendo exploratorio por la
+cobertura.</p>
+<p><img width="627" height="143" alt="Precio y características del vehículo" src="figures/03_precio_caracteristicas.png" /></p>
+<h3>3.7 Interés y exposición</h3>
+<p>La mediana de vistas por anuncio es de <strong>12</strong>, con un máximo de 15 821. La
+mediana de imágenes es 1 y solo 8 anuncios (0,1 %) están destacados. Estas
+variables describen la exposición dentro de la plataforma, no la demanda real:
+un anuncio con muchas vistas puede ser simplemente antiguo o estar mal
+preciado.</p>
+<hr />
+<h2>4. Componente cualitativo: discurso de la oferta y ausencia de entrevistas</h2>
+<h3>4.1 Lo que se intentó</h3>
+<p>El diseño original preveía <strong>30 entrevistas</strong> a personas con relación directa
+al mercado (usuarios, vendedores y mecánicos), con consentimiento informado por
+escrito. Ese componente <strong>no se completó</strong>.</p>
+<p>Al cierre de este informe:</p>
+<ul>
+<li><strong>0 entrevistas válidas</strong> están registradas en la base de datos del proyecto.</li>
+<li>Existe <strong>1 fila (E01)</strong> en el CSV, pero está <strong>excluida</strong> porque no tiene
+  consentimiento firmado.</li>
+<li>Hubo <strong>10 contactos exploratorios</strong> de los que solo se conservan nombres y
+  fotos de los vehículos, sin respuestas registradas y sin autorización escrita
+  para publicar datos personales.</li>
+</ul>
+<p>Por decisión metodológica y ética, esas 10 personas <strong>no se usan</strong>: un nombre y
+una foto no constituyen una entrevista, y el permiso verbal para conversar no
+autoriza a publicar nombre ni imagen. Incluirlas sería presentar como evidencia
+algo que no existe.</p>
+<p>Para no dejar el componente vacío, se optó por un <strong>análisis de contenido de
+los anuncios</strong>. No sustituye a las entrevistas ni mide la demanda: describe el
+discurso público de la oferta. Se hizo en dos pasos:</p>
+<ol>
+<li>una muestra aleatoria de <strong>200 títulos</strong>, clasificada con seis temas;</li>
+<li>un contraste con los <strong>9 841 títulos</strong> del dataset, con una taxonomía más
+   amplia de ocho temas.</li>
+</ol>
+<h3>4.2 Análisis de una muestra de 200 títulos</h3>
+<p>Se tomó una muestra aleatoria simple de <strong>200 títulos</strong> de
+<code>anuncios_limpios.csv</code> (semilla 2026). La muestra quedó compuesta por
+<strong>68 bicicletas, 65 motos de combustión, 58 motos eléctricas y 9 patinetas</strong>,
+una proporción cercana a la del dataset. Cada título se clasificó con seis
+temas: nueva o usada, batería o autonomía, papeles o garantía, motivo de venta,
+urgente y negociable. Un título puede recibir más de un tema.</p>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th style="text-align: right;">Muestra (n = 200)</th>
+<th style="text-align: right;">% muestra</th>
+<th style="text-align: right;">% total (n = 9 841)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nueva o usada</td>
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">8,5</td>
+<td style="text-align: right;">8,6</td>
+</tr>
+<tr>
+<td>Batería o autonomía</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">5,5</td>
+<td style="text-align: right;">6,5</td>
+</tr>
+<tr>
+<td>Papeles o garantía</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1,5</td>
+<td style="text-align: right;">3,2</td>
+</tr>
+<tr>
+<td>Motivo de venta</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0,0</td>
+<td style="text-align: right;">0,1</td>
+</tr>
+<tr>
+<td>Urgente</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0,5</td>
+<td style="text-align: right;">0,1</td>
+</tr>
+<tr>
+<td>Negociable</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0,5</td>
+<td style="text-align: right;">0,4</td>
+</tr>
+</tbody>
+</table>
+<p><img width="627" height="243" alt="Temas destacados en una muestra de 200 títulos" src="figures/08_temas_200_titulos.png" /></p>
+<p><strong>El 84,5 % de los títulos (169 de 200) no menciona ninguno de los seis temas.</strong>
+Solo el 15,5 % (31) aporta al menos una señal de estado, batería, papeles,
+urgencia, negociación o motivo de venta. La proporción es muy cercana a la del
+total del dataset (17,3 % con al menos un tema), lo que sugiere que la muestra
+reproduce razonablemente el patrón general.</p>
+<p>Para interpretar la muestra, conviene mirar cómo se distribuyen esos mismos seis
+temas en todo el dataset (n = 9 841; por categoría: 3 146 bicicletas, 3 349 de
+combustión, 2 807 eléctricas y 539 patinetas), donde las categorías sí tienen
+tamaño suficiente para comparar:</p>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th style="text-align: right;">Bicicletas</th>
+<th style="text-align: right;">Combustión</th>
+<th style="text-align: right;">Eléctricas</th>
+<th style="text-align: right;">Patinetas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nueva o usada</td>
+<td style="text-align: right;">10,3</td>
+<td style="text-align: right;">8,4</td>
+<td style="text-align: right;">7,7</td>
+<td style="text-align: right;">5,4</td>
+</tr>
+<tr>
+<td>Batería o autonomía</td>
+<td style="text-align: right;">0,8</td>
+<td style="text-align: right;">1,7</td>
+<td style="text-align: right;">16,5</td>
+<td style="text-align: right;">17,1</td>
+</tr>
+<tr>
+<td>Papeles o garantía</td>
+<td style="text-align: right;">1,3</td>
+<td style="text-align: right;">7,0</td>
+<td style="text-align: right;">1,1</td>
+<td style="text-align: right;">0,7</td>
+</tr>
+<tr>
+<td>Motivo de venta</td>
+<td style="text-align: right;">0,1</td>
+<td style="text-align: right;">0,2</td>
+<td style="text-align: right;">0,0</td>
+<td style="text-align: right;">0,2</td>
+</tr>
+<tr>
+<td>Urgente</td>
+<td style="text-align: right;">0,1</td>
+<td style="text-align: right;">0,0</td>
+<td style="text-align: right;">0,1</td>
+<td style="text-align: right;">0,0</td>
+</tr>
+<tr>
+<td>Negociable</td>
+<td style="text-align: right;">0,3</td>
+<td style="text-align: right;">0,2</td>
+<td style="text-align: right;">0,7</td>
+<td style="text-align: right;">0,4</td>
+</tr>
+</tbody>
+</table>
+<p>En el total, los datos muestran tres patrones:</p>
+<ul>
+<li><strong>La batería y la autonomía son el argumento de las eléctricas y las
+  patinetas</strong> (16,5 % y 17,1 %), no de las de combustión (1,7 %) ni de las
+  bicicletas (0,8 %).</li>
+<li><strong>Los papeles y la garantía son el argumento de las motos de combustión</strong>
+  (7,0 %), muy por encima de las eléctricas (1,1 %) y las bicicletas (1,3 %).
+  Tiene sentido: la documentación y la chapa son más relevantes en un vehículo
+  que se registra y se traspasa.</li>
+<li><strong>El estado o la novedad aparece en todas las categorías</strong>, con más peso en
+  bicicletas (10,3 %) y combustión (8,4 %). La urgencia, la negociación y el
+  motivo de venta son casi inexistentes en el título: no porque no ocurran,
+  sino porque se resuelven en la conversación privada.</li>
+</ul>
+<p>Ejemplos textuales reales (8 títulos, limpiados; se conservan erratas):</p>
+<ul>
+<li><strong>Nueva o usada:</strong> “Bicicletas medida 20 Rali Roky naranja para varón sin
+  ruedas de apoyo nuevas en su caja”.</li>
+<li><strong>Nueva o usada:</strong> “Bicicletas Nuevas de montaña de 24”.</li>
+<li><strong>Batería o autonomía:</strong> “Vendo moto Aguila sin batería en 450 USD”.</li>
+<li><strong>Batería o autonomía:</strong> “MOTO AUTOMÁTICA TOPMAQ RAPTOR (kms) 200 CC,
+  4 Tiempos, Capacidad 6 L, Autonomia 35 KM/L, alarma [...] CON CHAPA Y
+  CERTIFICO”.</li>
+<li><strong>Papeles o garantía:</strong> “Moto isuki 250cc con chapa y circulacion”.</li>
+<li><strong>Papeles o garantía:</strong> “El Mejor Onebot Directo a Chapa”.</li>
+<li><strong>Urgente:</strong> “Súper oferta. Muévete rápido y sin complicaciones con nuestras
+  bicicletas. Medidas 20, 24 y 26” (se omitieron emojis).</li>
+<li><strong>Negociable:</strong> “Bicicleta 26 REBAJA ESPECIAL”.</li>
+</ul>
+<p>El segundo ejemplo de batería es un <strong>falso positivo</strong>: es una moto de
+combustión que declara consumo (“Autonomía 35 KM/L”), no una batería. El
+ejemplo se conserva porque muestra justamente el límite del método: la
+clasificación automática por palabras clave no distingue el contexto. Lo mismo
+puede ocurrir con “nueva”, que a veces califica a la batería y no al vehículo.</p>
+<h3>4.3 Contraste con los 9 841 títulos</h3>
+<p>Para comprobar que el patrón no es un artefacto de la muestra, se clasificaron
+los <strong>9 841 títulos</strong> con una taxonomía más amplia de ocho temas: estado o
+novedad, especificaciones técnicas, garantía o papeles, precio u oferta, uso o
+destinatario, urgencia o motivo de venta, contacto o ubicación, y accesorios.</p>
+<table>
+<thead>
+<tr>
+<th>Tema</th>
+<th style="text-align: right;">Anuncios</th>
+<th style="text-align: right;">%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Especificaciones técnicas</td>
+<td style="text-align: right;">2 171</td>
+<td style="text-align: right;">22,1</td>
+</tr>
+<tr>
+<td>Estado o novedad</td>
+<td style="text-align: right;">1 614</td>
+<td style="text-align: right;">16,4</td>
+</tr>
+<tr>
+<td>Precio, oferta o negociación</td>
+<td style="text-align: right;">665</td>
+<td style="text-align: right;">6,8</td>
+</tr>
+<tr>
+<td>Uso, trabajo o destinatario</td>
+<td style="text-align: right;">540</td>
+<td style="text-align: right;">5,5</td>
+</tr>
+<tr>
+<td>Urgencia o motivo de venta</td>
+<td style="text-align: right;">458</td>
+<td style="text-align: right;">4,7</td>
+</tr>
+<tr>
+<td>Garantía, papeles o trámites</td>
+<td style="text-align: right;">160</td>
+<td style="text-align: right;">1,6</td>
+</tr>
+<tr>
+<td>Accesorios o extras</td>
+<td style="text-align: right;">132</td>
+<td style="text-align: right;">1,3</td>
+</tr>
+<tr>
+<td>Contacto o ubicación</td>
+<td style="text-align: right;">122</td>
+<td style="text-align: right;">1,2</td>
+</tr>
+</tbody>
+</table>
+<p>Con esta taxonomía, <strong>5 316 títulos (54,0 %)</strong> no mencionan ninguno de los ocho
+temas; el 46,0 % restante aporta algún elemento. La diferencia con el 84,5 % de
+la muestra no es una contradicción: la taxonomía amplia incluye
+especificaciones técnicas, uso, precio, contacto y accesorios, que son más
+frecuentes que los motivos de venta o la negociación. Las dos lecturas apuntan
+en la misma dirección: <strong>el título se usa para describir el vehículo, no para
+explicar la operación</strong>.</p>
+<p><img width="627" height="243" alt="Temas mencionados en los títulos de los anuncios" src="figures/07_temas_anuncios.png" /></p>
+<p>El contraste también revela diferencias por categoría:</p>
+<ul>
+<li>En motos de combustión, el <strong>44,1 %</strong> de los títulos menciona
+  especificaciones técnicas (cilindrada, potencia, voltaje), frente al
+  <strong>19,5 %</strong> en eléctricas y apenas el <strong>1,4 %</strong> en bicicletas.</li>
+<li>En bicicletas domina el <strong>uso o destinatario</strong> (<strong>15,2 %</strong>): “para niños”,
+  “de montaña”, “de mujer”.</li>
+<li>En eléctricas y de combustión el acento está en el <strong>estado o novedad</strong>
+  (<strong>19,9 %</strong> y <strong>19,8 %</strong>), con el año 2026 como señal de estreno.</li>
+<li>La <strong>garantía y los papeles</strong> aparecen solo en el <strong>1,6 %</strong> de los títulos,
+  aunque en motos de combustión suben al <strong>2,7 %</strong>.</li>
+</ul>
+<h3>4.4 Limitación del componente cualitativo</h3>
+<p><strong>Consecuencia:</strong> este informe describe la <strong>oferta</strong> (precios pedidos y
+discurso de los anuncios), no la <strong>demanda</strong> ni la experiencia de los
+compradores. No responde cuánto se pagó realmente, qué problemas enfrentan los
+dueños, por qué eligen una eléctrica o cómo afectan los repuestos y los
+trámites. Esas preguntas quedan abiertas para una segunda fase. El análisis de
+contenido de 200 títulos y el contraste con los 9 841 permiten describir el
+discurso de la oferta, pero no reemplazan la voz de los actores.</p>
+<hr />
+<h2>5. Discusión</h2>
+<h3>5.1 Lo que sí dicen los datos</h3>
+<p>Los anuncios permiten afirmar tres cosas con razonable solidez descriptiva:</p>
+<ol>
+<li><strong>El mercado relevante se cotiza en USD.</strong> El 97,4 % de los anuncios con
+   moneda usa dólares. Esto segmenta la demanda y hace que el precio sea
+   sensible al tipo de cambio y a la disponibilidad de divisas.</li>
+<li><strong>La moto de combustión es el segmento más caro y la bicicleta el más
+   barato.</strong> La diferencia de medianas (2 200 vs. 160 USD) es de más de diez
+   veces.</li>
+<li><strong>La eléctrica ocupa un espacio intermedio</strong>, con mediana de 1 485 USD y
+   alta dispersión. Es la puerta de entrada motorizada más accesible, pero su
+   costo total depende de batería, carga y repuestos, variables que los
+   anuncios no capturan.</li>
+</ol>
+<h3>5.2 Lo que no se puede concluir</h3>
+<ul>
+<li><strong>No son precios de transacción.</strong> Son precios pedidos; el precio final
+  puede ser menor tras la negociación.</li>
+<li><strong>No es una muestra representativa.</strong> Revolico concentra La Habana y a
+  quienes tienen acceso a internet y a divisas.</li>
+<li><strong>La categorización tiene ruido.</strong> Las patinetas incluyen carriolas,
+  scooters infantiles y sets de protección; las bicicletas mezclan infantiles y
+  de adulto. El filtro redujo el ruido, no lo eliminó.</li>
+<li><strong>La cobertura de marca, año y cilindrada es baja.</strong> Los cruces con esas
+  variables son indicativos, no concluyentes.</li>
+<li><strong>No hay entrevistas.</strong> El análisis de contenido de los títulos (200 títulos
+  y el contraste con los 9 841) describe el discurso de la oferta, pero no
+  permite triangular con la experiencia de los actores.</li>
+</ul>
+<h3>5.3 Comparación con la hipótesis de partida</h3>
+<p>La hipótesis era que la moto eléctrica sería más barata que la de combustión y
+que tendría mayor dispersión. Ambas cosas se cumplen en los datos: 1 485 vs.
+2 200 USD de mediana y desviación típica de 3 117 vs. 2 257. La dirección es
+correcta, pero el anuncio no permite explicar el mecanismo (autonomía, batería,
+procedencia, repuestos). Esa explicación exigía las entrevistas que no se
+pudieron hacer.</p>
+<hr />
+<h2>6. Limitaciones</h2>
+<ol>
+<li><strong>Muestra no probabilística y concentrada.</strong> 94,8 % de los anuncios son de
+   La Habana. No se pueden estimar proporciones poblacionales.</li>
+<li><strong>Precios pedidos, no pagados.</strong> El sesgo de negociación no se puede
+   cuantificar con esta fuente.</li>
+<li><strong>Cobertura incompleta de variables derivadas.</strong> Marca 31,3 %, año 8,4 %,
+   cilindrada 13,6 %.</li>
+<li><strong>Ruido de categorización.</strong> Especialmente en patinetas y bicicletas.</li>
+<li><strong>Sin entrevistas válidas.</strong> El diseño mixto no se completó. Se compensó
+   con un análisis de contenido de una muestra de 200 títulos y un contraste
+   con los 9 841, que describe la oferta pero no recoge la experiencia de
+   compradores ni vendedores.</li>
+<li><strong>Una sola captura temporal.</strong> No hay serie temporal; no se puede hablar de
+   tendencia.</li>
+<li><strong>Monedas no convertidas.</strong> Los 251 anuncios en CUP y el de MLC quedan
+   fuera de los cruces de precio.</li>
+</ol>
+<hr />
+<h2>7. Conclusiones</h2>
+<p>El mercado de vehículos ligeros que se anuncia en Revolico es un mercado
+<strong>dolarizado, capitalino y segmentado por categoría</strong>. Las motos de combustión
+se cotizan alrededor de <strong>2 200 USD</strong>, las eléctricas alrededor de <strong>1 485
+USD</strong>, las patinetas en <strong>720 USD</strong> y las bicicletas en <strong>160 USD</strong>. La
+eléctrica es la opción motorizada más barata, pero también la más heterogénea.</p>
+<p>La base construida —9 841 anuncios limpios y reproducibles— es un insumo útil
+para describir la oferta y para diseñar una segunda fase. No sustituye el
+trabajo de campo: sin entrevistas válidas no se puede explicar por qué los
+precios son esos, cómo se negocian ni qué problemas enfrentan los usuarios.</p>
+<p>La limitación principal de esta entrega es explícita: <strong>no se completaron las
+30 entrevistas</strong>. Se prefirió declararlo antes que rellenar el informe con
+datos no verificados. El análisis de contenido de los anuncios (200 títulos y
+el contraste con los 9 841) permite describir el discurso de la oferta, pero no
+sustituye la experiencia de los actores. La recomendación es completar el
+componente cualitativo en una segunda fase y, mientras tanto, usar este
+documento como línea base cuantitativa.</p>
+<hr />
+<h2>8. Recomendaciones</h2>
+<ol>
+<li><strong>Completar el campo</strong> con 30 entrevistas cortas (5–7 minutos), con
+   consentimiento escrito y cuotas por perfil.</li>
+<li><strong>Repetir la captura</strong> en 3–6 meses para construir una serie temporal.</li>
+<li><strong>Mejorar la extracción de marca y año</strong> con reglas más finas o revisión
+   manual de una submuestra.</li>
+<li><strong>Documentar una tasa CUP/USD</strong> para incorporar los anuncios en pesos.</li>
+<li><strong>Separar patinetas y bicicletas infantiles</strong> en la categorización.</li>
+<li><strong>Ampliar el análisis de contenido</strong> a los cuerpos de los anuncios y a una
+   segunda muestra, para reducir los falsos positivos de la clasificación
+   automática.</li>
+</ol>
+<hr />
+<h2>9. Referencias</h2>
+<ul>
+<li>Revolico. Anuncios de motos, bicicletas y patinetas. Captura del 4 de
+  noviembre de 2026. https://www.revolico.com</li>
+<li>Documentación interna del proyecto: <code>docs/HANDOFF.md</code>,
+  <code>docs/ENTREVISTAS.md</code>, <code>docs/PROTOCOLO_TRABAJO_CAMPO.md</code>.</li>
+<li>Código de recolección, limpieza y análisis: <code>src/</code>.</li>
+<li>Análisis de contenido de los anuncios: <code>reports/analisis_200_titulos.txt</code>,
+  <code>reports/analisis_temas.txt</code> y <code>reports/figures/08_temas_200_titulos.png</code>.</li>
+<li>Cuadernos de análisis: <code>notebooks/02_limpieza.ipynb</code>,
+  <code>notebooks/03_eda.ipynb</code>.</li>
+</ul>
+<hr />
+<h2 style="page-break-before: always;">Anexos</h2>
+<h3>Anexo A. Figuras adicionales</h3>
+<p>Los comandos para reproducir la base, las figuras y el informe están en
+<code>README.md</code> y en <code>docs/HANDOFF.md</code>.</p>
+<p><img width="627" height="355" alt="Anuncios por categoría" src="figures/fig01_anuncios_categoria.png" /></p>
+<p><img width="627" height="400" alt="Anuncios por provincia" src="figures/fig02_provincia.png" /></p>
+<p><img width="627" height="373" alt="Precio por categoría" src="figures/fig03_precio_categoria.png" /></p>
+<p><img width="627" height="373" alt="Histograma de precios" src="figures/fig04_precio_histograma.png" /></p>
+</body></html>

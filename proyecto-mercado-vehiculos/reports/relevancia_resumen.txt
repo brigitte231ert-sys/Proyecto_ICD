@@ -1,0 +1,45 @@
+============================================================
+RESUMEN DE RELEVANCIA
+============================================================
+Anuncios de entrada: 13446
+Relacionados (sí): 11621
+Para revisar: 295
+Excluidos: 1530
+Duplicados por id: 0
+Duplicados por título+precio+municipio: 817
+Relacionados únicos: 10804
+
+Relacionados por categoría:
+  bicicletas            3953
+  motos_combustion      3916
+  motos_electricas      3122
+  patinetas              630
+
+Excluidos por motivo (top 10):
+   1325  fuera de alcance
+     29  repuesto o accesorio: planta
+     18  repuesto o accesorio: lavadora
+     16  repuesto o accesorio: gasolina
+     16  repuesto o accesorio: gomas
+     13  repuesto o accesorio: bateria
+     13  repuesto o accesorio: goma
+      8  repuesto o accesorio: baterias
+      6  repuesto o accesorio: casco
+      6  repuesto o accesorio: candado
+
+Para revisar: ejemplos
+  motos_combustion   | Vendo motor | sin producto explícito; menciona motor
+  motos_combustion   | Venta de baterias | sin producto explícito; menciona bateria
+  motos_combustion   | Candado con Alarma para Motos | posible accesorio para moto: candado
+  motos_combustion   | Moto MZ 250cc (con piezas de repuestos) | producto moto con posible ruido: repuesto
+  motos_combustion   | Riga chino 47, motor nuevo, carburador de x100. | sin producto explícito; menciona motor
+  motos_combustion   | Motor | título 'motor' ambiguo (¿moto o repuesto?)
+  motos_combustion   | Motores 1800w 5polos | título 'motor' ambiguo (¿moto o repuesto?)
+  motos_combustion   | adornos con forma de bicicleta | producto bicicleta con posible ruido: adorno
+  motos_combustion   | DualFuel  Gasolina y gas de balita  8000watts | sin producto explícito; menciona gasolina
+  motos_combustion   | Se vende Motor XMT 250cc tal como se ve en las fotos de fabr | sin producto explícito; menciona motor
+  motos_combustion   | Tengo esta gn 125 casi new..busco carro | sin producto explícito; menciona carro
+  motos_combustion   | Ofertica lidna  3000w 110v 4t con carburador original pa gas | sin producto explícito; menciona carburador
+  motos_combustion   | 🏍️🔥 ZOSEN 2026: 150cc, 4T, 35km/L, disco ventilado, doble am | sin producto explícito; menciona amortiguador
+  motos_combustion   | Venta de piezas para motos de combustión | posible accesorio para moto: pieza
+  motos_combustion   | Sin Bateria.Rally ZP 3 ruedas muy Buen estado. | sin producto explícito; menciona bateria

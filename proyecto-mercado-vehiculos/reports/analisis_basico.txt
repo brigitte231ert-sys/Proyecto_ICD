@@ -1,0 +1,223 @@
+==============================================================================
+ANÁLISIS DESCRIPTIVO DEL MERCADO
+Motos, bicicletas y patinetas · Revolico
+==============================================================================
+Archivo: /home/bri/proyectos/proyecto-mercado-vehiculos/data/processed/anuncios_relacionados_unicos.csv
+Anuncios: 10804
+Publicación: 2026-09-05 → 2026-11-05
+Captura: 2026-11-04T22:27:16-05:00 → 2026-11-04T22:36:09-05:00
+
+--- COMPOSICIÓN ---
+Por categoría:
+  motos_combustion       3621 (33.5%)
+  bicicletas             3593 (33.3%)
+  motos_electricas       3018 (27.9%)
+  patinetas               572 (5.3%)
+Por moneda:
+  USD                    9949 (92.1%)
+  (vacía)                 592 (5.5%)
+  CUP                     262 (2.4%)
+  MLC                       1 (0.0%)
+Top 10 provincias:
+  La Habana             10218 (94.6%)
+  Artemisa                150 (1.4%)
+  Pinar del Río            75 (0.7%)
+  Villa Clara              68 (0.6%)
+  Matanzas                 58 (0.5%)
+  Cienfuegos               54 (0.5%)
+  Santiago de Cuba         46 (0.4%)
+  Holguín                  40 (0.4%)
+  Granma                   16 (0.1%)
+  Guantánamo               15 (0.1%)
+Top 10 municipios:
+  Centro Habana          2384 (22.1%)
+  Playa                  1526 (14.1%)
+  Diez de Octubre        1258 (11.6%)
+  Plaza                  1099 (10.2%)
+  Cerro                   836 (7.7%)
+  Boyeros                 589 (5.5%)
+  Marianao                464 (4.3%)
+  La Lisa                 461 (4.3%)
+  Arroyo Naranjo          384 (3.6%)
+  Habana Vieja            341 (3.2%)
+
+--- CALIDAD DE DATOS ---
+Nulos por columna:
+  precio                  592 (5.5%)
+  moneda                  592 (5.5%)
+IDs duplicados: 0
+Duplicados por título+precio+municipio: 0
+Precios < 5 (posibles señuelo): 351
+Precios ≥ 1,000,000 (posibles errores): 4
+
+Ruido en títulos:
+  'pieza': 30
+  'casco': 43
+  'gasolina': 172
+  'carro': 1
+  'extractor': 1
+  'bomba': 27
+
+--- COBERTURA DE VARIABLES DERIVADAS ---
+  marca             3251 / 10804 (30.1%)
+  anio               872 / 10804 (8.1%)
+  condicion         1162 / 10804 (10.8%)
+  cilindrada_cc     1414 / 10804 (13.1%)
+  tipo              7215 / 10804 (66.8%)
+  (solo valores informativos: 'no_especificada' cuenta como nulo)
+
+--- PRECIOS ---
+CUP: n=251  mín=      12 p25=   2,200 mediana=   5,000 p75=  20,000 máx=  250,000
+MLC: n=1    mín=      80 p25=      80 mediana=      80 p75=      80 máx=       80
+USD: n=9589 mín=       5 p25=     190 mediana=   1,100 p75=   2,100 máx=  111,111
+
+Precios por categoría y moneda (USD y CUP):
+  bicicletas         USD  n=2936 mín=       5 p25=     110 mediana=     160 p75=     190 máx=  100,000
+  motos_combustion   USD  n=3322 mín=       5 p25=   1,850 mediana=   2,200 p75=   2,600 máx=   65,000
+  motos_electricas   USD  n=2796 mín=       5 p25=     770 mediana=   1,485 p75=   1,850 máx=  111,111
+  patinetas          USD  n=535  mín=       6 p25=     550 mediana=     720 p75=     780 máx=    2,750
+  bicicletas         CUP  n=209  mín=      12 p25=   2,400 mediana=   5,000 p75=  20,000 máx=  160,000
+  motos_combustion   CUP  n=27   mín=      13 p25=   1,500 mediana=   3,000 p75=   7,250 máx=  120,000
+  motos_electricas   CUP  n=11   mín=     200 p25=   2,500 mediana=   6,000 p75=  12,500 máx=  250,000
+
+--- MARCAS ---
+Marcas identificadas: 3251 de 10804 (30.1%)
+  Topmaq                443
+  JMD                   269
+  Yoazaky               203
+  Xmotors               163
+  Halcon                159
+  Unison                150
+  Vivamax               148
+  Katzu                 140
+  Tank                  130
+  Italy                 128
+  Suzuki                113
+  AVA                   111
+  Mishozuki             110
+  Silver Bike           105
+  Lifan                 103
+  Motorstreck            91
+  Izuki                  78
+  Krathos                66
+  Rali                   62
+  Jin                    39
+
+Top 5 marcas por producto (precio mediano en USD, n ≥ 10):
+  motos_combustion:
+    Xmotors          n=159  mediana=2,400
+    Unison           n=149  mediana=2,600
+    Italy            n=128  mediana=2,550
+    Katzu            n=122  mediana=2,250
+    Suzuki           n=113  mediana=2,200
+  motos_electricas:
+    Topmaq           n=343  mediana=2,200
+    Yoazaky          n=181  mediana=1,738
+    JMD              n=174  mediana=1,550
+    Halcon           n=59   mediana=1,600
+    Mishozuki        n=45   mediana=1,700
+  bicicletas:
+    Vivamax          n=148  mediana=180
+    Silver Bike      n=105  mediana=185
+    Rali             n=50   mediana=170
+    Myniao           n=28   mediana=170
+    Huffy            n=28   mediana=150
+  patinetas:
+    JMD              n=81   mediana=750
+    Xiaomi           n=6    mediana=550
+    Roinside         n=6    mediana=370
+    Halcon           n=5    mediana=775
+
+Precio mediano por marca (USD, n ≥ 20):
+  Yamaha             n=20   mín=     800 p25=   2,400 mediana=   5,500 p75=   9,000 máx=   20,000
+  Honda              n=20   mín=      11 p25=   3,025 mediana=   4,500 p75=  10,000 máx=   12,000
+  Unison             n=146  mín=     280 p25=   2,112 mediana=   2,600 p75=   2,800 máx=    3,000
+  Tank               n=120  mín=   2,000 p25=   2,550 mediana=   2,600 p75=   2,750 máx=    2,950
+  Izuki              n=75   mín=     200 p25=   2,375 mediana=   2,600 p75=   2,800 máx=    3,700
+  Italy              n=125  mín=   1,950 p25=   2,450 mediana=   2,550 p75=   2,600 máx=    2,950
+  Krathos            n=62   mín=   2,550 p25=   2,550 mediana=   2,550 p75=   3,260 máx=    3,260
+  Lifan              n=93   mín=     550 p25=   2,150 mediana=   2,400 p75=   2,500 máx=   10,500
+  Xmotors            n=154  mín=   1,670 p25=   2,200 mediana=   2,400 p75=   2,600 máx=    2,800
+  Mishozuki          n=105  mín=     350 p25=   1,800 mediana=   2,300 p75=   2,300 máx=    3,000
+  Katzu              n=136  mín=     180 p25=   2,000 mediana=   2,250 p75=   2,500 máx=    3,100
+  Suzuki             n=107  mín=      65 p25=   1,680 mediana=   2,200 p75=   3,225 máx=   13,650
+  Topmaq             n=418  mín=      60 p25=   1,805 mediana=   2,200 p75=   2,450 máx=    5,450
+  AVA                n=108  mín=     350 p25=   1,600 mediana=   2,190 p75=   2,512 máx=    2,900
+  Halcon             n=152  mín=     219 p25=   1,600 mediana=   1,950 p75=   2,600 máx=    3,000
+
+--- CONDICIÓN ---
+Con condición declarada en el título:
+  declaradas: 1162 de 10804 (10.8%)
+  nueva                1022
+  usada                 100
+  seminueva              40
+
+Precio mediano por condición en motos (USD, n ≥ 10):
+  no_especificada    n=5462 mín=       5 p25=   1,300 mediana=   1,900 p75=   2,450 máx=  111,111
+  nueva              n=611  mín=       5 p25=   1,420 mediana=   1,890 p75=   2,350 máx=   10,500
+  seminueva          n=17   mín=     350 p25=   1,300 mediana=   1,500 p75=   2,700 máx=   12,000
+  usada              n=28   mín=     120 p25=     700 mediana=   1,210 p75=   1,425 máx=    2,500
+
+Precio mediano por condición en bicicletas (USD, n ≥ 10):
+  no_especificada    n=2583 mín=       5 p25=     110 mediana=     160 p75=     190 máx=  100,000
+  nueva              n=294  mín=       7 p25=     120 mediana=     160 p75=     190 máx=    1,750
+  seminueva          n=16   mín=      60 p25=     120 mediana=     150 p75=     182 máx=      500
+  usada              n=43   mín=       5 p25=      50 mediana=      90 p75=     150 máx=      480
+
+Precio mediano por condición en patinetas (USD, n ≥ 10):
+  nueva              n=38   mín=      24 p25=     435 mediana=     750 p75=     800 máx=    1,020
+  no_especificada    n=490  mín=       6 p25=     552 mediana=     720 p75=     780 máx=    2,750
+
+--- TIPO DE PROPULSIÓN ---
+  combustion           3615 (33.5%)
+  electrica            3600 (33.3%)
+  no_especificada      3589 (33.2%)
+
+Precio mediano por tipo en motos (USD, n ≥ 10):
+  combustion         n=3319 mín=       5 p25=   1,850 mediana=   2,200 p75=   2,600 máx=   65,000
+  electrica          n=2799 mín=       5 p25=     772 mediana=   1,490 p75=   1,850 máx=  111,111
+
+Precio mediano por tipo en bicicletas (USD, n ≥ 10):
+  electrica          n=181  mín=      15 p25=     480 mediana=     550 p75=     830 máx=    1,320
+  no_especificada    n=2755 mín=       5 p25=     105 mediana=     155 p75=     180 máx=  100,000
+
+Precio mediano por tipo en patinetas (USD, n ≥ 10):
+  no_especificada    n=177  mín=       6 p25=     350 mediana=     740 p75=     780 máx=    2,750
+  electrica          n=358  mín=      35 p25=     565 mediana=     700 p75=     780 máx=    1,750
+
+--- AÑO ---
+Con año extraído en motos: 840 de 6639 (12.7%)
+Rango: 1950 → 2026 | mediana: 2026
+
+Precio mediano por tramo de año en motos (USD, n ≥ 10):
+  ≤2015        n=13   mín=      11 p25=   1,950 mediana=   3,200 p75=  10,000 máx=   12,000
+  2020-2022    n=19   mín=   1,500 p25=  13,575 mediana=  20,000 p75=  20,500 máx=   65,000
+  2023-2025    n=87   mín=      10 p25=   2,250 mediana=   2,700 p75=   5,250 máx=   26,000
+  2026         n=670  mín=     600 p25=   1,692 mediana=   2,100 p75=   2,500 máx=   13,150
+
+--- CILINDRADA ---
+Con cilindrada extraída en motos: 1414 de 6639 (21.3%)
+Rango: 45 → 2500 cc | mediana: 175
+
+Precio mediano por cilindrada en motos (USD, n ≥ 10):
+  <100 cc        n=10   mín=     180 p25=     245 mediana=     525 p75=     938 máx=    1,500
+  100-149 cc     n=148  mín=     500 p25=   1,700 mediana=   1,950 p75=   2,100 máx=    3,500
+  150-199 cc     n=592  mín=     200 p25=   1,850 mediana=   1,962 p75=   2,300 máx=    4,500
+  200-249 cc     n=335  mín=      30 p25=   2,250 mediana=   2,500 p75=   2,600 máx=    3,600
+  250+ cc        n=257  mín=      10 p25=   2,500 mediana=   2,700 p75=   3,260 máx=   25,500
+
+--- RELACIONES (Pearson, solo motos en USD) ---
+  año          r=-0.167  n=798
+  cilindrada   r=+0.619  n=1342
+
+--- INTERÉS Y EXPOSICIÓN ---
+Vistas: mediana=12 | máx=15821
+Imágenes: mediana=1 | máx=12
+Anuncios destacados: 9 (0.1%)
+
+--- NOTAS ---
+- Son precios pedidos, no precios de transacción.
+- Los estadísticos usan un rango de 5 a 1 000 000 para excluir señuelos y errores.
+- No mezclar USD y CUP sin una tasa documentada; los cruces usan USD.
+- Los grupos con n < 10 no son concluyentes.
+- La muestra es no probabilística y está concentrada en La Habana.

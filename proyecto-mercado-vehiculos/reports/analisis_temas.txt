@@ -1,0 +1,82 @@
+==============================================================================
+ANÁLISIS DE CONTENIDO DE LOS TÍTULOS
+Motos, bicicletas y patinetas · Revolico
+==============================================================================
+Archivo: /home/bri/proyectos/proyecto-mercado-vehiculos/data/processed/anuncios_limpios.csv
+Anuncios: 9 841
+
+Este análisis describe qué destaca el vendedor en el título.
+No son respuestas de personas: es el discurso de la oferta.
+
+--- FRECUENCIA DE TEMAS ---
+  Especificaciones técnicas         2 171 ( 22.1 %)
+  Estado o novedad                  1 614 ( 16.4 %)
+  Precio, oferta o negociación        665 (  6.8 %)
+  Uso, trabajo o destinatario         540 (  5.5 %)
+  Urgencia o motivo de venta          458 (  4.7 %)
+  Garantía, papeles o trámites        160 (  1.6 %)
+  Accesorios o extras                 132 (  1.3 %)
+  Contacto o ubicación                122 (  1.2 %)
+
+  Títulos con al menos un tema: 4 525 (46.0 %)
+  Títulos sin ningún tema:      5 316 (54.0 %)
+
+--- TEMAS POR CATEGORÍA (% de anuncios de cada categoría) ---
+  Tema                               bicicletas motos_combus motos_electr    patinetas
+  Especificaciones técnicas                1.4%        44.1%        19.5%        18.9%
+  Estado o novedad                        10.8%        19.8%        19.9%         9.3%
+  Precio, oferta o negociación             9.3%         5.3%         5.3%         8.0%
+  Uso, trabajo o destinatario             15.2%         0.4%         1.1%         3.5%
+  Urgencia o motivo de venta               6.4%         5.8%         2.0%         1.3%
+  Garantía, papeles o trámites             1.3%         2.7%         0.9%         0.7%
+  Accesorios o extras                      1.7%         1.0%         1.5%         1.1%
+  Contacto o ubicación                     1.3%         1.4%         1.0%         0.9%
+
+--- EJEMPLOS TEXTUALES (títulos reales, sin editar) ---
+
+  [Especificaciones técnicas]
+    - Topmaq f3 Bateria 55 amperes
+    - 💸REBAJA 💸PATINETA ELECTRICA BATERIA DE LITHIO #PRECIO 590 MENSAJERIA INCLUIDA EN LA HABANA
+    - Bicicleta eléctrica 48V 15ah con batería de litio
+
+  [Estado o novedad]
+    - `🏍️MOTO DEPORTIVA DE COMBUSTIÓN WYS 2026🏍️`
+    - `🛵MOTO ELÉCTRICA BUCATTI (M) 2026🛵
+    - 🛵MOTO ELÉCTRICA TOPMAQ ÁGUILA 2026🛵
+
+  [Precio, oferta o negociación]
+    - 💸REBAJA 💸PATINETA ELECTRICA BATERIA DE LITHIO #PRECIO 590 MENSAJERIA INCLUIDA EN LA HABANA
+    - OFERTA HASTA EL VIERNES 🔥CARDENAS Y COLON
+    - REBAJA BICIMOTO YOAZAKY GALÁTICA
+
+  [Uso, trabajo o destinatario]
+    - 💸REBAJA 💸PATINETA ELECTRICA BATERIA DE LITHIO #PRECIO 590 MENSAJERIA INCLUIDA EN LA HABANA
+    - Bicicleta para niños 16”, con ruedas de apoyo y cesta
+    - Bicicleta de niño/adulto
+
+  [Urgencia o motivo de venta]
+    - Se vende moto deportiva
+    - Vendo bicimoto nueva sin estrenar, sin baterías
+    - Vendo Moto eléctrica 60v x 20ah
+
+  [Garantía, papeles o trámites]
+    - Lexzuki 150cc caja 6ta 1650usd💵 2210km recorridos Tiene alarma, sus embellecedores, bocina, papeles certifico,circ
+    - Moto eléctrica nueva con factura. 60km . Muy cómoda y ligera
+    - MOTOR KRATHOS 250 CC, NUEVA EN SU GUACAL, CON FACTURA, NACIONALIZACIÓN. SALE CON SU DOCUMENTACIÓN LISTO PARA CHAPA
+
+  [Accesorios o extras]
+    - ⚙️​ KIT HERRAMIENTAS 11 EN 1 PARA BICICLETA ⚙️​ COMPACTO ⚙️​ MULTIFUNCIONAL ⚙️​ 5.887.23.60
+    - *BICIMOTO POWER MATECH EVOLUTION 🛵* ⚡3000W/⚡60V/⚡30Ah⚡ • Autonomía: Hasta 100 km ✅ •Alarma luces led •
+    - Lexzuki 150cc caja 6ta 1650usd💵 2210km recorridos Tiene alarma, sus embellecedores, bocina, papeles certifico,circ
+
+  [Contacto o ubicación]
+    - 💸REBAJA 💸PATINETA ELECTRICA BATERIA DE LITHIO #PRECIO 590 MENSAJERIA INCLUIDA EN LA HABANA
+    - MOTO Racing AVA KRESTON (NUEVA EN CAJA)+TRANSPORTE. Sin Batería (TF:[contacto]) La Habana
+    - Motos eléctricas nuevas Kvitova modelo PLA 51 llamar al ☎️ [contacto]
+
+--- NOTAS ---
+- La clasificación es automática por palabras clave; puede haber falsos
+  positivos (por ejemplo, 'nueva' referido a la batería).
+- Los porcentajes describen los títulos, no la intención real del vendedor.
+- Un título puede mencionar varios temas.
+- Esta tabla no reemplaza las entrevistas: las complementa desde la oferta.

@@ -1,0 +1,30 @@
+# Entorno y caché de Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Datos crudos y procesados (se regeneran con los scripts)
+# Se conservan las carpetas mediante .gitkeep
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Figuras generadas por los notebooks (opcional: comenta si quieres versionarlas)
+reports/figures/*
+!reports/figures/.gitkeep
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Entornos y secretos
+.env
+.env.*

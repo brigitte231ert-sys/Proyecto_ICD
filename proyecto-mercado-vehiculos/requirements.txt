@@ -1,0 +1,17 @@
+# Dependencias del proyecto
+# Instala con: pip install -r requirements.txt
+
+# Extracción
+requests>=2.31
+
+# Análisis y limpieza
+pandas>=2.2
+numpy>=1.26
+
+# Visualización
+matplotlib>=3.8
+seaborn>=0.13
+
+# Notebooks
+jupyter>=1.0
+nbformat>=5.9

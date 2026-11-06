@@ -1,0 +1,41 @@
+==============================================================================
+RESUMEN DE ENTREVISTAS
+Mercado de motos, bicicletas y patinetas · Revolico + campo
+==============================================================================
+Entrevistas registradas: 0
+  Profundas: 0 | Cortas: 0
+Filas en el CSV: 1 | Con consentimiento: 0 | Excluidas: 1
+Aviso: las filas sin consentimiento firmado no se analizan.
+
+--- AVANCE HACIA LA META ---
+  Meta: 30 entrevistas | Registradas: 0 | Faltan: 30
+  Códigos pendientes: E01, E02, E03, E04, E05, E06, E07, E08, E09, E10, E11, E12, E13, E14, E15, E16, E17, E18, E19, E20, E21, E22, E23, E24, E25, E26, E27, E28, E29, E30
+
+--- PERFIL DE LA MUESTRA ---
+
+--- VEHÍCULO Y CONDICIÓN ---
+
+--- CANALES DE COMPRA ---
+
+--- USO Y RELACIÓN CON EL MERCADO ---
+
+--- PRECIO PAGADO (P16 / P59) ---
+  (sin datos de precio pagado)
+
+--- GASTO MENSUAL (P60) ---
+    (sin datos de monto/moneda)
+
+--- PROBLEMAS Y VALORACIÓN ---
+
+--- TRIANGULACIÓN CON ANUNCIOS (USD) ---
+  Motos combustión     mediana anuncios = 2,200 USD
+  Motos eléctricas     mediana anuncios = 1,485 USD
+  Motos combustión     sin datos de entrevistas en USD para comparar
+  Motos eléctricas     sin datos de entrevistas en USD para comparar
+
+  Recuerda: los anuncios son precios pedidos y las entrevistas son precios pagados o presupuestos declarados.
+
+==============================================================================
+Nota: muestra no probabilística. Con n pequeño, las frecuencias son
+ilustrativas y no permiten estimar proporciones poblacionales.
+==============================================================================

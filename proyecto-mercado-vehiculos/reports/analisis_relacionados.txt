@@ -1,0 +1,124 @@
+========================================================================
+ANÁLISIS DESCRIPTIVO PRELIMINAR
+========================================================================
+Archivo: data/processed/anuncios_relacionados_unicos.csv
+Anuncios: 10801
+Publicación: 2026-09-05 → 2026-11-05
+Captura: 2026-11-04T22:27:16-05:00 → 2026-11-04T22:36:09-05:00
+
+--- COMPOSICIÓN ---
+Por categoría:
+  motos_combustion      3621
+  bicicletas            3593
+  motos_electricas      3018
+  patinetas              569
+Por moneda:
+  USD                   9946
+  (vacía)                592
+  CUP                    262
+  MLC                      1
+Top 10 provincias:
+  La Habana            10215
+  Artemisa               150
+  Pinar del Río           75
+  Villa Clara             68
+  Matanzas                58
+  Cienfuegos              54
+  Santiago de Cuba        46
+  Holguín                 40
+  Granma                  16
+  Guantánamo              15
+Top 10 municipios:
+  Centro Habana         2383
+  Playa                 1526
+  Diez de Octubre       1258
+  Plaza                 1099
+  Cerro                  836
+  Boyeros                588
+  Marianao               464
+  La Lisa                461
+  Arroyo Naranjo         384
+  Habana Vieja           341
+
+--- CALIDAD DE DATOS ---
+Nulos por columna:
+  precio                 592 (5.5%)
+  moneda                 592 (5.5%)
+IDs duplicados: 0
+Duplicados por título+precio+municipio: 0
+Precios < 5 (posibles señuelo): 367
+      1 USD  | BICIMOTO TOMQMAN EVOLUTION
+      1 USD  | YAMAHA MT-09 2022 🔥🏍️ _¡PRÁCTICAMENTE NUEVA!
+      4 USD  | POTENCIADOR DE OCTANAJE
+      1 USD  | Bicimotos Topmaq Evolution
+      1 USD  | 🏍 HONDA 600 rr Año: 2012
+
+Ruido de categoría (títulos con palabras ajenas):
+  'moto': 5091
+  'patineta': 628
+  'scooter': 112
+  'pieza': 30
+  'casco': 43
+  'gasolina': 172
+  'carro': 1
+  'extractor': 1
+  'bomba': 27
+
+--- PRECIOS ---
+(sin moneda): n=10209 mín=       1 p25=     180 mediana=   1,000 p75=   2,100 máx=1,111,111,111,111,111
+CUP: n=262  mín=       1 p25=   2,000 mediana=   4,400 p75=  20,000 máx=1,111,111
+MLC: n=1    mín=      80 p25=      80 mediana=      80 p75=      80 máx=       80
+USD: n=9946 mín=       1 p25=     175 mediana=     950 p75=   2,050 máx=1,111,111,111,111,111
+
+Precios por categoría y moneda (precio > 0):
+  bicicletas         CUP        n=218  mín=       1 p25=   2,000 mediana=   4,500 p75=  20,000 máx=1,111,111
+  bicicletas         MLC        n=1    mín=      80 p25=      80 mediana=      80 p75=      80 máx=       80
+  bicicletas         USD        n=3127 mín=       1 p25=     100 mediana=     155 p75=     185 máx=111,111,111
+  motos_combustion   CUP        n=29   mín=       1 p25=   1,200 mediana=   2,500 p75=   6,500 máx=  120,000
+  motos_combustion   USD        n=3424 mín=       1 p25=   1,800 mediana=   2,200 p75=   2,550 máx=1,111,112
+  motos_electricas   CUP        n=11   mín=     200 p25=   2,500 mediana=   6,000 p75=  12,500 máx=  250,000
+  motos_electricas   USD        n=2854 mín=       1 p25=     750 mediana=   1,470 p75=   1,850 máx=1,111,111,111,111,111
+  patinetas          CUP        n=4    mín=   1,500 p25=   5,475 mediana=   6,800 p75=   7,600 máx=   10,000
+  patinetas          USD        n=541  mín=       1 p25=     500 mediana=     700 p75=     780 máx=    2,750
+
+--- MARCAS ---
+  Otra/No identificada    8010
+  Topmaq                   433
+  JMD                      269
+  Unison                   172
+  Tank                     150
+  Vivamax                  148
+  Yoazaky                  145
+  Xmotors                  141
+  Katzu                    129
+  Italy                    128
+  Suzuki                   120
+  Mishozuki                111
+  Lifan                    105
+  Silver Bike               97
+  Motorstreck               92
+
+--- CONDICIÓN Y TIPO ---
+  condición no_especificada     9947
+  condición nueva                753
+  condición usada                101
+  tipo      electrica           3625
+  tipo      combustion          3589
+  tipo      no_especificada     3587
+
+--- AÑO Y CILINDRADA ---
+Con año extraído: 894 de 10801
+Rango de años: 1950 → 2026 | mediana: 2026
+Con cilindrada extraída: 1414 de 10801
+Rango de cilindradas: 15 → 2500 cc
+
+--- INTERÉS Y EXPOSICIÓN ---
+Vistas: mediana=12 | máx=15821
+Imágenes: mediana=1 | máx=12
+Anuncios destacados: 9 (0.1%)
+
+--- NOTAS ---
+- Son precios pedidos, no precios de transacción.
+- No mezclar USD y CUP sin una tasa documentada.
+- Los conteos por grupo con n < 10 no son concluyentes.
+- Revisar manualmente los títulos marcados como ruido.

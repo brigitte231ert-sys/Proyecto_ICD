@@ -1,0 +1,905 @@
+{
+  "meta": {
+    "proyecto": "Mercado de motos, bicicletas y patinetas en Cuba",
+    "instrumento": "Cuestionario de entrevistas de mercado",
+    "version": "1.3",
+    "fecha": "2026-11-05",
+    "muestra_prevista": 10,
+    "idioma": "es",
+    "descripcion": "Entrevista semiestructurada sobre compra, uso y percepción del mercado de motos. Los datos primarios se triangulan con los anuncios de Revolico.",
+    "anonimizacion": "Cada persona se identifica solo como E01…E10. No guardar nombres, teléfonos, direcciones ni imágenes.",
+    "consentimiento": "Verbal e informado. El audio se usa solo para transcribir y se elimina al terminar.",
+    "monedas": ["USD", "CUP", "MLC", "Mixto"],
+    "bloques": {
+      "compra_y_canal": ["P01", "P02"],
+      "uso": ["P03"],
+      "moto_electrica": ["P04", "P06", "P07"],
+      "fallos_y_preferencia": ["P05", "P08"],
+      "perfil": ["P09", "P10", "P11"],
+      "transaccion": ["P12", "P13", "P14", "P15", "P16", "P17", "P18", "P19", "P20"],
+      "uso_y_gastos": ["P21", "P22", "P23", "P24", "P25", "P26"],
+      "preferencias": ["P27", "P28", "P29", "P30"],
+      "oferta_y_canales": ["P31", "P32", "P33", "P34", "P35"],
+      "precios_y_economia": ["P36", "P37", "P38", "P39", "P40"],
+      "regulacion_y_tramites": ["P41", "P42", "P43", "P44", "P45"],
+      "repuestos_y_posventa": ["P46", "P47", "P48", "P49", "P50"],
+      "tendencias": ["P51", "P52", "P53", "P54", "P55"],
+      "encuesta_usuarios": ["P56", "P57", "P58", "P59", "P60", "P61", "P62", "P63"]
+    },
+    "tipos_de_pregunta": [
+      "unica",
+      "multiple",
+      "booleana",
+      "numerico",
+      "texto",
+      "texto_largo",
+      "fecha",
+      "ranking",
+      "compuesta"
+    ],
+    "notas": [
+      "P27 pide ordenar del 1 al 5 pero lista 6 elementos: se usa orden 1–6 y se documenta la corrección.",
+      "Las preguntas de carga (P04–P07) solo aplican a quienes tienen o tuvieron una moto eléctrica.",
+      "Las preguntas de transacción (P12–P20) solo aplican a quienes han comprado o vendido al menos una moto (P10 > 0).",
+      "Nunca mezclar USD y CUP sin registrar la moneda en P17 o en el campo 'moneda' correspondiente.",
+      "Las preguntas P03, P21 y P22 equivalen a las antiguas P01, P02 y P03 del primer borrador.",
+      "El bloque P31–P35 es de oferta y canales: se pregunta a vendedores, importadores o revendedores (P09). Si responde un comprador, registrar la respuesta como percepción.",
+      "P34 separa monedas y canales porque son dos dimensiones distintas y no deben sumarse en un mismo conteo.",
+      "El bloque P36–P40 es de precios y economía: se pregunta a todos, con prioridad a vendedores e importadores.",
+      "Las cifras de P37 y P40 siempre se guardan con su moneda; no se convierten CUP a USD sin una tasa documentada.",
+      "P41–P55 son de contexto regulatorio, posventa y tendencias: aplicar a informantes clave (vendedores, importadores, mecánicos). Si responde un usuario, registrar la respuesta como percepción.",
+      "P56–P63 forman una encuesta corta de usuarios. Varias preguntas repiten P12–P26: si ya se respondieron, no se vuelven a preguntar en la misma persona.",
+      "En P58 no se registra el nombre del vendedor, solo el tipo (estatal, mipyme, importador, revendedor, particular)."
+    ],
+    "mapeo_borrador_anterior": {
+      "P01_anterior": "P03",
+      "P02_anterior": "P21",
+      "P03_anterior": "P22"
+    },
+    "ejemplo_respuesta": {
+      "P01": "Revolico",
+      "P02": "Precio",
+      "P03": ["Transporte personal", "Trabajo"],
+      "P04": { "frecuencia_carga": "cada 2 días", "horas_carga": 6 },
+      "P05": { "respuesta": true, "detalle": "Se le quemó el controlador" },
+      "P06": { "coincide": false, "ha_bajado": true, "detalle": "Anunciaba 80 km y hace 50" },
+      "P07": { "respuesta": true, "detalle": "Carga solo de madrugada" },
+      "P08": { "preferencia": "Eléctrica", "motivo": "Más barata de mantener" },
+      "P09": ["Usuario", "Comprador"],
+      "P10": 2,
+      "P11": true,
+      "P12": { "marca": "Topmaq", "modelo": "Raptor", "anio": 2024, "cilindrada_cc": null, "potencia_kw": 1.5 },
+      "P13": "Eléctrica",
+      "P14": "Usada",
+      "P15": 2024,
+      "P16": 1800,
+      "P17": "USD",
+      "P18": "Negociable",
+      "P19": ["Efectivo"],
+      "P20": 15,
+      "P21": 40,
+      "P22": { "respuesta": false, "otro_medio": "Auto" },
+      "P23": { "monto": 500, "moneda": "CUP", "concepto": "Electricidad" },
+      "P24": { "monto": 20, "moneda": "USD" },
+      "P25": { "monto": 10, "moneda": "USD" },
+      "P26": { "problemas": true, "dias_conseguir": 20, "detalle": "Batería" },
+      "P27": { "Precio": 1, "Marca": 3, "Autonomía": 2, "Repuestos": 4, "Estética": 6, "Papeles": 5 },
+      "P28": { "considero": true, "motivo": "Por el costo de la gasolina" },
+      "P29": "Buscaría mejor autonomía y papeles en regla",
+      "P30": "Eléctrica",
+      "P31": ["Mipymes", "Revendedores", "Mercado informal"],
+      "P32": {
+        "marcas": "Topmaq, JMD, Xmotors",
+        "motivo": "Precio accesible y repuestos disponibles"
+      },
+      "P33": ["Importación privada", "Remesas"],
+      "P34": {
+        "monedas": ["USD"],
+        "canales": ["Redes sociales", "Revolico"]
+      },
+      "P35": "Financiamiento, permisos de importación y competencia informal",
+      "P36": "Costo de importación, margen del revendedor y escasez de oferta",
+      "P37": {
+        "precio_oficial": 1500,
+        "precio_reventa": 2200,
+        "moneda": "USD",
+        "comentario": "La reventa supera ampliamente el precio oficial"
+      },
+      "P38": {
+        "existen": false,
+        "quienes": "No conoce créditos para particulares",
+        "detalle": ""
+      },
+      "P39": {
+        "inflacion": "Sube los precios de los repuestos",
+        "tipo_cambio": "Encubre el precio real en CUP",
+        "escasez_divisas": "Limita la importación"
+      },
+      "P40": {
+        "electricidad_combustible": 20,
+        "repuestos": 10,
+        "seguro": 5,
+        "impuestos": 0,
+        "moneda": "USD",
+        "concepto_energia": "Electricidad"
+      },
+      "P41": {
+        "comprar": "Documento de identidad y factura",
+        "importar": "Permiso de importación y pago de aranceles",
+        "circular": "Licencia, placa y revisión técnica"
+      },
+      "P42": {
+        "licencia": "Se obtiene en la policía de tránsito",
+        "placas": "Se tramitan con la matrícula",
+        "revision_tecnica": "Anual en taller autorizado",
+        "seguro": "Póliza obligatoria"
+      },
+      "P43": "La importación particular está limitada por cupos y permisos",
+      "P44": {
+        "aranceles": "Se pagan según valor y cilindrada",
+        "aduanas": "Requiere declaración y revisión",
+        "limites": "Una unidad por persona y año"
+      },
+      "P45": "Las eléctricas no pagan combustible ni tienen las mismas restricciones de emisiones",
+      "P46": {
+        "facilidad": "Difícil",
+        "comentario": "Depende de la marca y del modelo"
+      },
+      "P47": {
+        "mas_demandados": "Baterías, frenos y neumáticos",
+        "mas_dificiles": "Controladores y piezas de motor"
+      },
+      "P48": {
+        "situacion": "Escasa",
+        "comentario": "Pocos talleres especializados"
+      },
+      "P49": {
+        "confianza": "Baja",
+        "motivo": "La garantía suele ser verbal"
+      },
+      "P50": {
+        "electricas": "Los apagones obligan a cargar de madrugada",
+        "gasolina": "La falta de combustible reduce el uso"
+      },
+      "P51": {
+        "creciendo": true,
+        "motivo": "Menor costo por kilómetro"
+      },
+      "P52": {
+        "turismo": "Aumenta la demanda de alquiler",
+        "mensajeria": "Impulsa motos económicas",
+        "transporte_privado": "Demanda motos de mayor autonomía"
+      },
+      "P53": {
+        "oportunidades": ["Baterías", "Carga solar"],
+        "comentario": "Falta financiamiento"
+      },
+      "P54": "Importación, divisas y repuestos",
+      "P55": "Más eléctricas y más servicios de posventa",
+      "P56": {
+        "tiene": true,
+        "marca": "Topmaq",
+        "modelo": "Raptor",
+        "anio": 2024
+      },
+      "P57": "Usada",
+      "P58": {
+        "lugar": "Revolico",
+        "tipo_vendedor": "Particular"
+      },
+      "P59": {
+        "monto": 1800,
+        "moneda": "USD"
+      },
+      "P60": {
+        "monto": 40,
+        "moneda": "USD"
+      },
+      "P61": {
+        "mas_gusta": "Autonomía",
+        "menos_gusta": "Conseguir repuestos"
+      },
+      "P62": {
+        "problemas": true,
+        "cual": ["Repuestos"],
+        "detalle": "Tardó un mes en conseguir la batería"
+      },
+      "P63": {
+        "recomienda": true,
+        "motivo": "Es útil para el transporte diario"
+      }
+    }
+  },
+  "preguntas": [
+    {
+      "id": "P01",
+      "pregunta": "¿Dónde la compraste?",
+      "tipo": "unica",
+      "opciones": ["Revolico", "Telegram", "Conocido"],
+      "permite_otro": true,
+      "obligatoria": true
+    },
+    {
+      "id": "P02",
+      "pregunta": "¿Qué fue lo más importante al comprar?",
+      "tipo": "unica",
+      "opciones": ["Precio", "Motor", "Autonomía", "Marca"],
+      "permite_otro": true,
+      "obligatoria": true
+    },
+    {
+      "id": "P03",
+      "pregunta": "¿Para qué la usas?",
+      "tipo": "multiple",
+      "opciones": ["Trabajo", "Transporte personal", "Mensajería", "Ocio"],
+      "obligatoria": true
+    },
+    {
+      "id": "P04",
+      "pregunta": "¿Cada cuánto la cargas y cuánto demora en cargar?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "frecuencia_carga", "tipo": "texto", "ejemplo": "cada 2 días" },
+        { "id": "horas_carga", "tipo": "numerico", "unidad": "horas" }
+      ],
+      "aplica_si": "P13 == 'Eléctrica'",
+      "obligatoria": false
+    },
+    {
+      "id": "P05",
+      "pregunta": "¿Has tenido fallos técnicos?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "respuesta", "tipo": "booleana" },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P06",
+      "pregunta": "¿La autonomía real coincide con la que anuncia el vendedor, y ha bajado con el tiempo?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "coincide", "tipo": "booleana" },
+        { "id": "ha_bajado", "tipo": "booleana" },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "aplica_si": "P13 == 'Eléctrica'",
+      "obligatoria": false
+    },
+    {
+      "id": "P07",
+      "pregunta": "¿Has tenido problemas con la carga en días de apagón?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "respuesta", "tipo": "booleana" },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "aplica_si": "P13 == 'Eléctrica'",
+      "obligatoria": false
+    },
+    {
+      "id": "P08",
+      "pregunta": "¿Prefieres una moto eléctrica o una de gasolina? ¿Por qué?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "preferencia",
+          "tipo": "unica",
+          "opciones": ["Eléctrica", "Gasolina", "Indiferente"]
+        },
+        { "id": "motivo", "tipo": "texto" }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P09",
+      "pregunta": "¿Qué relación tienes con el mercado de motos?",
+      "tipo": "multiple",
+      "opciones": ["Comprador", "Vendedor", "Mecánico", "Revendedor", "Usuario", "Importador"],
+      "obligatoria": true
+    },
+    {
+      "id": "P10",
+      "pregunta": "¿Cuántas motos has comprado o vendido en los últimos 5 años?",
+      "tipo": "numerico",
+      "unidad": "motos",
+      "minimo": 0,
+      "obligatoria": true
+    },
+    {
+      "id": "P11",
+      "pregunta": "¿Has comprado o vendido más de una vez?",
+      "tipo": "booleana",
+      "obligatoria": true
+    },
+    {
+      "id": "P12",
+      "pregunta": "¿Qué moto compraste o vendiste?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "marca", "tipo": "texto" },
+        { "id": "modelo", "tipo": "texto" },
+        { "id": "anio", "tipo": "numerico", "unidad": "año" },
+        { "id": "cilindrada_cc", "tipo": "numerico", "unidad": "cc" },
+        { "id": "potencia_kw", "tipo": "numerico", "unidad": "kW" }
+      ],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false,
+      "nota": "Usar cilindrada en combustión y potencia en eléctricas; no inventar el dato que no exista."
+    },
+    {
+      "id": "P13",
+      "pregunta": "¿Es eléctrica o de combustión?",
+      "tipo": "unica",
+      "opciones": ["Eléctrica", "Combustión"],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P14",
+      "pregunta": "¿Nueva o usada?",
+      "tipo": "unica",
+      "opciones": ["Nueva", "Usada"],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P15",
+      "pregunta": "¿En qué año fue la transacción?",
+      "tipo": "numerico",
+      "unidad": "año",
+      "minimo": 2000,
+      "maximo": 2026,
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P16",
+      "pregunta": "¿Cuánto pagaste o vendiste exactamente?",
+      "tipo": "numerico",
+      "unidad": "moneda",
+      "aplica_si": "P10 > 0",
+      "obligatoria": false,
+      "nota": "Registrar siempre junto con P17."
+    },
+    {
+      "id": "P17",
+      "pregunta": "¿En qué moneda?",
+      "tipo": "unica",
+      "opciones": ["USD", "CUP", "MLC", "Mixto"],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P18",
+      "pregunta": "¿El precio fue negociable o fijo?",
+      "tipo": "unica",
+      "opciones": ["Negociable", "Fijo"],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P19",
+      "pregunta": "¿Cómo pagaste?",
+      "tipo": "multiple",
+      "opciones": ["Efectivo", "Transferencia", "Remesa", "Préstamo"],
+      "aplica_si": "P10 > 0",
+      "obligatoria": false
+    },
+    {
+      "id": "P20",
+      "pregunta": "¿Cuánto tiempo pasó desde que decidiste comprar hasta que la tuviste?",
+      "tipo": "numerico",
+      "unidad": "días",
+      "aplica_si": "P10 > 0",
+      "obligatoria": false,
+      "nota": "Si la respuesta es cualitativa ('poco', 'meses'), guardar el texto en el campo detalle."
+    },
+    {
+      "id": "P21",
+      "pregunta": "¿Cuántos km haces al día?",
+      "tipo": "numerico",
+      "unidad": "km/día",
+      "obligatoria": true
+    },
+    {
+      "id": "P22",
+      "pregunta": "¿Es tu único medio de transporte?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "respuesta", "tipo": "booleana" },
+        { "id": "otro_medio", "tipo": "texto" }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P23",
+      "pregunta": "¿Cuánto gastas al mes en combustible o electricidad?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "monto", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        },
+        {
+          "id": "concepto",
+          "tipo": "unica",
+          "opciones": ["Combustible", "Electricidad"]
+        }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P24",
+      "pregunta": "¿Cuánto gastas al mes en repuestos?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "monto", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P25",
+      "pregunta": "¿Cuánto gastas al mes en seguridad (candados, alarmas)?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "monto", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P26",
+      "pregunta": "¿Has tenido problemas con repuestos? ¿Cuánto tardas en conseguir uno?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "problemas", "tipo": "booleana" },
+        { "id": "dias_conseguir", "tipo": "numerico", "unidad": "días" },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P27",
+      "pregunta": "¿Qué fue lo más importante al elegir la moto? Ordena del 1 al 5.",
+      "tipo": "ranking",
+      "elementos": ["Precio", "Marca", "Autonomía", "Repuestos", "Estética", "Papeles"],
+      "orden": { "minimo": 1, "maximo": 6 },
+      "obligatoria": true,
+      "nota": "El enunciado original dice 1 al 5 pero lista 6 elementos. Se usa 1–6; documentar la corrección."
+    },
+    {
+      "id": "P28",
+      "pregunta": "¿Consideraste una eléctrica? ¿Por qué sí o no?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "considero", "tipo": "booleana" },
+        { "id": "motivo", "tipo": "texto" }
+      ],
+      "obligatoria": true
+    },
+    {
+      "id": "P29",
+      "pregunta": "Si tuvieras que comprar otra hoy, ¿qué cambiarías?",
+      "tipo": "texto_largo",
+      "obligatoria": true
+    },
+    {
+      "id": "P30",
+      "pregunta": "¿Qué tipo de moto busca más el cubano?",
+      "tipo": "unica",
+      "opciones": ["Eléctrica", "Scooter", "100-150 cc", "250 cc", "Otra"],
+      "permite_otro": true,
+      "obligatoria": true
+    },
+    {
+      "id": "P31",
+      "pregunta": "¿Quiénes venden motos en Cuba?",
+      "tipo": "multiple",
+      "opciones": ["Tiendas estatales", "Mipymes", "Importadores privados", "Revendedores", "Mercado informal"],
+      "aplica_si": "P09 incluye Vendedor, Importador o Revendedor",
+      "obligatoria": false
+    },
+    {
+      "id": "P32",
+      "pregunta": "¿Qué marcas dominan el mercado y por qué?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "marcas",
+          "tipo": "texto",
+          "nota": "Separar por comas; normalizar contra el catálogo de marcas del proyecto."
+        },
+        { "id": "motivo", "tipo": "texto_largo" }
+      ],
+      "aplica_si": "P09 incluye Vendedor, Importador o Revendedor",
+      "obligatoria": false
+    },
+    {
+      "id": "P33",
+      "pregunta": "¿Cómo se abastece el mercado?",
+      "tipo": "multiple",
+      "opciones": ["Importación estatal", "Importación privada", "Remesas", "Donaciones"],
+      "aplica_si": "P09 incluye Vendedor, Importador o Revendedor",
+      "obligatoria": false
+    },
+    {
+      "id": "P34",
+      "pregunta": "¿En qué monedas y canales se compran las motos?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "monedas",
+          "tipo": "multiple",
+          "opciones": ["USD", "CUP", "MLC"]
+        },
+        {
+          "id": "canales",
+          "tipo": "multiple",
+          "opciones": ["Redes sociales", "Revolico", "Telegram", "Tienda física", "Conocido"],
+          "permite_otro": true
+        }
+      ],
+      "aplica_si": "P09 incluye Vendedor, Importador o Revendedor",
+      "obligatoria": false
+    },
+    {
+      "id": "P35",
+      "pregunta": "¿Qué barreras enfrenta un nuevo vendedor o importador de motos?",
+      "tipo": "texto_largo",
+      "aplica_si": "P09 incluye Vendedor, Importador o Revendedor",
+      "obligatoria": false
+    },
+    {
+      "id": "P36",
+      "pregunta": "¿Cómo se forma el precio de una moto en Cuba?",
+      "tipo": "texto_largo",
+      "obligatoria": false,
+      "nota": "Explorar costo de importación, margen, escasez, moneda y regateo."
+    },
+    {
+      "id": "P37",
+      "pregunta": "¿Qué diferencia hay entre el precio oficial y el precio de reventa?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "precio_oficial", "tipo": "numerico" },
+        { "id": "precio_reventa", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        },
+        { "id": "comentario", "tipo": "texto" }
+      ],
+      "obligatoria": false,
+      "nota": "Si no conoce cifras, dejar los montos vacíos y usar 'comentario'."
+    },
+    {
+      "id": "P38",
+      "pregunta": "¿Existen créditos o financiamientos para comprar una moto? ¿Quiénes pueden acceder?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "existen", "tipo": "booleana" },
+        { "id": "quienes", "tipo": "texto" },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P39",
+      "pregunta": "¿Cómo afecta la inflación, el tipo de cambio y la escasez de divisas al mercado?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "inflacion", "tipo": "texto" },
+        { "id": "tipo_cambio", "tipo": "texto" },
+        { "id": "escasez_divisas", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P40",
+      "pregunta": "¿Cuánto cuesta mantener una moto al mes? (electricidad o combustible, repuestos, seguro, impuestos)",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "electricidad_combustible", "tipo": "numerico" },
+        { "id": "repuestos", "tipo": "numerico" },
+        { "id": "seguro", "tipo": "numerico" },
+        { "id": "impuestos", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        },
+        {
+          "id": "concepto_energia",
+          "tipo": "unica",
+          "opciones": ["Electricidad", "Combustible"]
+        }
+      ],
+      "obligatoria": false,
+      "nota": "No sumar los componentes si están en monedas distintas."
+    },
+    {
+      "id": "P41",
+      "pregunta": "¿Qué requisitos legales se necesitan para comprar, importar y circular una moto?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "comprar", "tipo": "texto" },
+        { "id": "importar", "tipo": "texto" },
+        { "id": "circular", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P42",
+      "pregunta": "¿Cómo funcionan las licencias de conducción, placas, revisión técnica y seguro?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "licencia", "tipo": "texto" },
+        { "id": "placas", "tipo": "texto" },
+        { "id": "revision_tecnica", "tipo": "texto" },
+        { "id": "seguro", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P43",
+      "pregunta": "¿Qué restricciones existen para que un particular importe una moto?",
+      "tipo": "texto_largo",
+      "obligatoria": false
+    },
+    {
+      "id": "P44",
+      "pregunta": "¿Cómo se aplican aranceles, aduanas y límites de importación?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "aranceles", "tipo": "texto" },
+        { "id": "aduanas", "tipo": "texto" },
+        { "id": "limites", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P45",
+      "pregunta": "¿Qué normativas diferencian a las motos eléctricas de las de combustión?",
+      "tipo": "texto_largo",
+      "obligatoria": false
+    },
+    {
+      "id": "P46",
+      "pregunta": "¿Qué tan fácil es conseguir repuestos y accesorios para motos?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "facilidad",
+          "tipo": "unica",
+          "opciones": ["Muy fácil", "Fácil", "Difícil", "Muy difícil", "No sabe"]
+        },
+        { "id": "comentario", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P47",
+      "pregunta": "¿Cuáles son los repuestos más demandados y los más difíciles de encontrar?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "mas_demandados", "tipo": "texto" },
+        { "id": "mas_dificiles", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P48",
+      "pregunta": "¿Cómo está la red de talleres y servicios técnicos especializados?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "situacion",
+          "tipo": "unica",
+          "opciones": ["Abundante", "Suficiente", "Escasa", "Nula", "No sabe"]
+        },
+        { "id": "comentario", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P49",
+      "pregunta": "¿Qué confianza tienen los compradores en la garantía y la posventa?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "confianza",
+          "tipo": "unica",
+          "opciones": ["Alta", "Media", "Baja", "Nula", "No sabe"]
+        },
+        { "id": "motivo", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P50",
+      "pregunta": "¿Cómo afectan los apagones y la falta de combustible al uso de motos eléctricas y de gasolina?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "electricas", "tipo": "texto" },
+        { "id": "gasolina", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P51",
+      "pregunta": "¿Está creciendo la preferencia por motos eléctricas? ¿Por qué?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "creciendo", "tipo": "booleana" },
+        { "id": "motivo", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P52",
+      "pregunta": "¿Qué impacto tienen el turismo, la mensajería y el transporte privado en la demanda?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "turismo", "tipo": "texto" },
+        { "id": "mensajeria", "tipo": "texto" },
+        { "id": "transporte_privado", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P53",
+      "pregunta": "¿Qué oportunidades hay en ensamblaje, baterías, carga solar o alquiler de motos?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "oportunidades",
+          "tipo": "multiple",
+          "opciones": ["Ensamblaje", "Baterías", "Carga solar", "Alquiler de motos", "Otro"],
+          "permite_otro": true
+        },
+        { "id": "comentario", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P54",
+      "pregunta": "¿Qué obstáculos frenan el crecimiento del mercado?",
+      "tipo": "texto_largo",
+      "obligatoria": false
+    },
+    {
+      "id": "P55",
+      "pregunta": "¿Cómo imagina el mercado de motos en Cuba dentro de 5 años?",
+      "tipo": "texto_largo",
+      "obligatoria": false
+    },
+    {
+      "id": "P56",
+      "pregunta": "¿Tiene moto? ¿Qué marca, modelo y año?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "tiene", "tipo": "booleana" },
+        { "id": "marca", "tipo": "texto" },
+        { "id": "modelo", "tipo": "texto" },
+        { "id": "anio", "tipo": "numerico", "unidad": "año" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P57",
+      "pregunta": "¿La compró nueva o usada?",
+      "tipo": "unica",
+      "opciones": ["Nueva", "Usada", "No aplica"],
+      "obligatoria": false
+    },
+    {
+      "id": "P58",
+      "pregunta": "¿Dónde y a quién se la compró?",
+      "tipo": "compuesta",
+      "campos": [
+        {
+          "id": "lugar",
+          "tipo": "unica",
+          "opciones": ["Revolico", "Telegram", "Redes sociales", "Tienda", "Conocido", "Otro"],
+          "permite_otro": true
+        },
+        {
+          "id": "tipo_vendedor",
+          "tipo": "unica",
+          "opciones": ["Estatal", "Mipyme", "Importador privado", "Revendedor", "Particular", "No sabe"]
+        }
+      ],
+      "obligatoria": false,
+      "nota": "No registrar el nombre de la persona; solo el tipo de vendedor."
+    },
+    {
+      "id": "P59",
+      "pregunta": "¿Cuánto pagó por ella?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "monto", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P60",
+      "pregunta": "¿Cuánto gasta al mes en mantenerla?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "monto", "tipo": "numerico" },
+        {
+          "id": "moneda",
+          "tipo": "unica",
+          "opciones": ["USD", "CUP", "MLC"]
+        }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P61",
+      "pregunta": "¿Qué es lo que más le gusta y lo que menos de la moto?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "mas_gusta", "tipo": "texto" },
+        { "id": "menos_gusta", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P62",
+      "pregunta": "¿Has tenido problemas con repuestos, trámites o seguro?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "problemas", "tipo": "booleana" },
+        {
+          "id": "cual",
+          "tipo": "multiple",
+          "opciones": ["Repuestos", "Trámites", "Seguro"]
+        },
+        { "id": "detalle", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    },
+    {
+      "id": "P63",
+      "pregunta": "¿Recomendarías comprar una moto en Cuba? ¿Por qué?",
+      "tipo": "compuesta",
+      "campos": [
+        { "id": "recomienda", "tipo": "booleana" },
+        { "id": "motivo", "tipo": "texto" }
+      ],
+      "obligatoria": false
+    }
+  ],
+  "respuestas": {
+    "E01": {},
+    "E02": {},
+    "E03": {},
+    "E04": {},
+    "E05": {},
+    "E06": {},
+    "E07": {},
+    "E08": {},
+    "E09": {},
+    "E10": {}
+  }
+}

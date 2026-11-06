@@ -1,0 +1,74 @@
+==============================================================================
+ANÁLISIS DE CONTENIDO DE 200 TÍTULOS
+Motos, bicicletas y patinetas · Revolico
+==============================================================================
+Archivo: /home/bri/proyectos/proyecto-mercado-vehiculos/data/processed/anuncios_limpios.csv
+Población: 9 841 anuncios
+Muestra: 200 títulos al azar (semilla 2026)
+
+Qué destaca el vendedor en el título. No son entrevistas:
+es el discurso de la oferta.
+
+--- FRECUENCIA EN LA MUESTRA ---
+  Nueva o usada              17 (  8.5 %)
+  Batería o autonomía        11 (  5.5 %)
+  Papeles o garantía          3 (  1.5 %)
+  Motivo de venta             0 (  0.0 %)
+  Urgente                     1 (  0.5 %)
+  Negociable                  1 (  0.5 %)
+
+  Con al menos un tema:   31 (15.5 %)
+  Sin ningún tema:       169 (84.5 %)
+
+--- COMPARACIÓN CON EL TOTAL (9 841) ---
+  Tema                       Muestra   Total
+  Nueva o usada               8.5%     8.6%
+  Batería o autonomía         5.5%     6.5%
+  Papeles o garantía          1.5%     3.2%
+  Motivo de venta             0.0%     0.1%
+  Urgente                     0.5%     0.1%
+  Negociable                  0.5%     0.4%
+
+--- COMPOSICIÓN DE LA MUESTRA ---
+  bicicletas             68
+  motos_combustion       65
+  motos_electricas       58
+  patinetas               9
+
+--- EJEMPLOS TEXTUALES (8 títulos reales, limpiados) ---
+  [Nueva o usada]
+    - Bicicletas medida 20 Rali Roky naranja para varón sin ruedas de apoyo nuevas en su caja
+
+  [Nueva o usada]
+    - Bicicletas Nuevas de montaña de 24.
+
+  [Batería o autonomía]
+    - MOTO AUTOMÁTICA TOPMAQ RAPTOR (kms) 200 CC, 4 Tiempos, Capacidad 6 L, Autonomia 35 KM/L, alarma ⁠🧾CON CHAPA Y CERTIFICO
+
+  [Batería o autonomía]
+    - Vendo moto Aguila sin batería en 450 USD
+
+  [Papeles o garantía]
+    - Moto isuki 250cc con chapa y circulacion
+
+  [Papeles o garantía]
+    - El Mejor Onebot Directo a Chapa
+
+  [Urgente]
+    - 🚨Súper oferta ‼️ Muévete rápido y sin complicaciones con nuestras bicicletas 🚲. Medidas 20 ,24 y 26 😱
+
+  [Negociable]
+    - Bicicleta 26 REBAJA ESPECIAL
+
+
+--- NOTAS ---
+- Clasificación automática por palabras clave; puede haber falsos
+  positivos (por ejemplo, 'nueva' referido a la batería).
+- Un título puede mencionar varios temas.
+- Los teléfonos, correos y enlaces se reemplazaron por [contacto],
+  [correo] y [enlace].
+- 'Motivo de venta' no tiene ejemplos porque ningún título de la
+  muestra declara por qué vende.
+- La muestra es aleatoria, pero el dataset no es representativo del
+  mercado: está concentrado en La Habana y en Revolico.
+- Esta tabla describe la oferta; no reemplaza las entrevistas.
